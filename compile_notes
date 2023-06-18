@@ -1,0 +1,20 @@
+clang -Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include/ -L/usr/local/opt/libomp/lib/ -lomp main.c -o main
+
+
+
+for t in 1 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35
+do
+    /usr/bin/clang -fcolor-diagnostics -fansi-escape-codes -Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include/ -L/usr/local/opt/libomp/lib/ -lomp -DNUMT=$t -DNUMTRIALS=$n main.c -o main
+    ./main
+done
+
+
+#!/bin/bash
+for n in 1024 2048 4096 8192 16384 32768
+do
+  for m in true true true true true false false false false false false false false false false
+  do
+       g++  mutex03.cpp  -DNUMN=$n -DUSE_MUTEX=$m  -o mutex03  -lm  -fopenmp
+      ./mutex03
+  done
+done
